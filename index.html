@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrumpVsMusk </title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="/background.jpg" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Bangers', cursive;
+      background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+      overflow-x: hidden;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('/background.jpg') no-repeat center center;
+      background-size: cover;
+      z-index: -1;
+      opacity: 0.3;
+    }
+    .comic-border {
+      border: 4px solid #000;
+      box-shadow: 6px 6px 0 #000;
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .speech-bubble {
+      position: relative;
+      background: #fff;
+      border: 4px solid #000;
+      border-radius: 20px;
+      padding: 12px;
+      margin: 16px;
+      text-align: center;
+      font-size: 1.25rem;
+      color: #000;
+      box-shadow: 4px 4px 0 #000;
+    }
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 8px solid transparent;
+      border-top: 8px solid #000;
+    }
+    .character {
+      transition: transform 0.3s ease;
+    }
+    .character:hover {
+      transform: scale(1.1);
+    }
+    .icon-soon {
+      position: relative;
+      display: inline-block;
+    }
+    .icon-soon::after {
+      content: 'SOON';
+      position: absolute;
+      top: -8px;
+      right: -16px;
+      background: #ffcc00;
+      color: #000;
+      padding: 4px 8px;
+      border: 2px solid #000;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      transform: rotate(15deg);
+    }
+    .poll-button {
+      transition: transform 0.2s ease;
+    }
+    .poll-button:hover {
+      transform: scale(1.05);
+    }
+    .poll-tally {
+      background: #ffcc00;
+      border: 3px solid #000;
+      border-radius: 8px;
+      padding: 8px;
+      margin-top: 8px;
+    }
+    .ca-text {
+      user-select: text;
+      word-break: break-all;
+      font-family: monospace;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      border-radius: 6px;
+      border: 2px solid #000;
+      box-shadow: 3px 3px 0 #000;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .ca-text:hover {
+      background: #333;
+    }
+    .ca-text.copied {
+      background: #28a745;
+    }
+    .vote-prompt {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      border: 4px solid #000;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 6px 6px 0 #000;
+      z-index: 10;
+      text-align: center;
+    }
+    .vote-prompt button {
+      margin: 8px;
+      padding: 8px 16px;
+      border: 2px solid #000;
+      border-radius: 6px;
+      background: #ffcc00;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .vote-prompt button:hover {
+      transform: scale(1.05);
+    }
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      p.text-2xl {
+        font-size: 1.25rem;
+      }
+      .speech-bubble {
+        font-size: 1rem;
+        margin: 12px;
+        padding: 10px;
+      }
+      .character img {
+        width: 150px;
+        height: 225px;
+      }
+      .poll-button {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+      }
+      .comic-border {
+        padding: 12px;
+      }
+      .icon-soon i {
+        font-size: 2rem;
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+      .icon-soon::after {
+        font-size: 0.6rem;
+        padding: 3px 6px;
+      }
+      .ca-text {
+        font-size: 0.8rem;
+        padding: 6px;
+      }
+      .vote-prompt {
+        width: 90%;
+        font-size: 0.9rem;
+      }
+      .vote-prompt button {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center text-center">
+  <header class="w-full py-4">
+    <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
+      Trump Vs Musk
+    </h1>
+    <p class="text-xl sm:text-2xl text-yellow-300 mt-2">The Ultimate Clash!</p>
+  </header>
+
+  <main class="flex flex-col items-center w-full max-w-4xl px-4">
+    <div class="comic-border my-6">
+      <div class="speech-bubble">
+        <p class="font-bold">Who will win this epic showdown?!</p>
+      </div>
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
+        <div class="character">
+          <img src="/elon.png" alt="Elon Cartoon" class="rounded-lg border-4 border-black">
+          <p class="text-lg font-bold mt-2">Elon the Innovator</p>
+        </div>
+        <div class="character">
+          <img src="/trump.png" alt="Trump Cartoon" class="rounded-lg border-4 border-black">
+          <p class="text-lg font-bold mt-2">Trump the Tycoon</p>
+        </div>
+      </div>
+    </div>
+
+    <section class="my-6">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Join the Battle!</h2>
+      <div class="flex flex-col items-center gap-4">
+        <div class="flex flex-col items-center">
+
+        <p class="ca-text text-sm sm:text-base" onclick="copyContractAddress('soon')">SOON</p>
+        </div>
+        <div class="flex justify-center gap-6">
+          <div class="icon-soon">
+            <i class="fa-brands fa-telegram w-12 h-12 text-white text-4xl"></i>
+          </div>
+          <div class="icon-soon">
+            <i class="fa-solid fa-x w-12 h-12 text-white text-4xl"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="my-6 comic-border w-full max-w-md">
+      <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-4">Cast Your Vote!</h2>
+      <div class="flex justify-center gap-4">
+        <button id="vote-elon" class="poll-button bg-blue-500 text-white text-base sm:text-lg py-2 px-4 border-2 border-black rounded-lg shadow-[3px_3px_0_#000]">
+          Vote Elon!
+        </button>
+        <button id="vote-trump" class="poll-button bg-red-500 text-white text-base sm:text-lg py-2 px-4 border-2 border-black rounded-lg shadow-[3px_3px_0_#000]">
+          Vote Trump!
+        </button>
+      </div>
+      <div id="poll-results" class="poll-tally mt-4 text-base sm:text-lg">
+        <p>Elon: <span id="elon-count">0</span> | Trump: <span id="trump-count">0</span></p>
+      </div>
+    </section>
+
+    <div id="vote-prompt" class="vote-prompt">
+      <p id="prompt-text">Are you sure you want to vote for <span id="candidate-name"></span>?</p>
+      <button id="confirm-vote">Yes</button>
+      <button id="cancel-vote">No</button>
+    </div>
+  </main>
+
+  <footer class="w-full py-4 mt-6 bg-black text-white">
+    <p class="text-base sm:text-lg">© 2025 Elon vs. Trump. All rights reserved.</p>
+  </footer>
+
+  <script type="module">
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDWv0JbpByFRootgiZ3lbHJmfAvmcRm1cs",
+      authDomain: "stake-45d82.firebaseapp.com",
+      projectId: "stake-45d82",
+      storageBucket: "stake-45d82.firebasestorage.app",
+      messagingSenderId: "1094443330709",
+      appId: "1:1094443330709:web:f696fad1766f38b17a7f9c"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Character animation
+    document.querySelectorAll('.character').forEach(char => {
+      char.addEventListener('click', () => {
+        char.classList.add('animate-bounce');
+        setTimeout(() => char.classList.remove('animate-bounce'), 500);
+      });
+    });
+
+    // Copy Contract Address to clipboard
+  function copyContractAddress(address) {
+    // Create a temporary textarea to hold the text
+    const textarea = document.createElement('textarea');
+    textarea.value = address;
+    document.body.appendChild(textarea);
+
+    // Select and copy the text
+    textarea.select();
+    textarea.setSelectionRange(0, 99999); // For mobile devices
+    document.execCommand('copy');
+
+    // Remove the textarea
+    document.body.removeChild(textarea);
+
+    // Optional: Show confirmation
+    alert('Copied: ' + address);
+  }
+
+    // Voting poll logic with Firebase Firestore
+    const votePrompt = document.getElementById('vote-prompt');
+    const promptText = document.getElementById('prompt-text');
+    const candidateName = document.getElementById('candidate-name');
+    const confirmVote = document.getElementById('confirm-vote');
+    const cancelVote = document.getElementById('cancel-vote');
+
+    let currentCandidate = null;
+
+    async function fetchVotes() {
+      try {
+        const docRef = doc(db, 'votes', 'voteCounts');
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          document.getElementById('elon-count').textContent = data.elonVotes || 0;
+          document.getElementById('trump-count').textContent = data.trumpVotes || 0;
+        } else {
+          // Initialize vote counts if document doesn't exist
+          await setDoc(docRef, { elonVotes: 0, trumpVotes: 0 });
+          document.getElementById('elon-count').textContent = 0;
+          document.getElementById('trump-count').textContent = 0;
+        }
+      } catch (error) {
+        console.error('Error fetching votes:', error);
+      }
+    }
+
+    async function submitVote(candidate) {
+      try {
+        const docRef = doc(db, 'votes', 'voteCounts');
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          if (candidate === 'elon') {
+            await updateDoc(docRef, { elonVotes: (docSnap.data().elonVotes || 0) + 1 });
+          } else if (candidate === 'trump') {
+            await updateDoc(docRef, { trumpVotes: (docSnap.data().trumpVotes || 0) + 1 });
+          }
+        } else {
+          await setDoc(docRef, {
+            elonVotes: candidate === 'elon' ? 1 : 0,
+            trumpVotes: candidate === 'trump' ? 1 : 0
+          });
+        }
+        await fetchVotes(); // Refresh vote counts
+      } catch (error) {
+        console.error('Error submitting vote:', error);
+      }
+    }
+
+    function showVotePrompt(candidate) {
+      candidateName.textContent = candidate.charAt(0).toUpperCase() + candidate.slice(1);
+      votePrompt.style.display = 'block';
+      currentCandidate = candidate;
+    }
+
+    function hideVotePrompt() {
+      votePrompt.style.display = 'none';
+      currentCandidate = null;
+    }
+
+    document.getElementById('vote-elon').addEventListener('click', () => {
+      showVotePrompt('elon');
+    });
+
+    document.getElementById('vote-trump').addEventListener('click', () => {
+      showVotePrompt('trump');
+    });
+
+    confirmVote.addEventListener('click', async () => {
+      if (currentCandidate) {
+        await submitVote(currentCandidate);
+        hideVotePrompt();
+      }
+    });
+
+    cancelVote.addEventListener('click', () => {
+      hideVotePrompt();
+    });
+
+    // Fetch initial vote counts
+    fetchVotes();
+  </script>
+</body>
+</html>
